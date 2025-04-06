@@ -1,12 +1,6 @@
 package com.crypto.trading.entity;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 import java.util.List;
 import java.util.Objects;
@@ -19,7 +13,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long ID;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private List<Wallet> wallets;
 
     private String userName;
@@ -68,5 +62,12 @@ public class User {
                 ", wallet=" + wallets +
                 ", userName='" + userName + '\'' +
                 '}';
+    }
+
+    public Wallet getWalletBySymbol(String symbol) {
+        return wallets.stream()
+                .filter(w -> symbol.equalsIgnoreCase(w.getSymbol()))
+                .findFirst()
+                .orElse(null);
     }
 }

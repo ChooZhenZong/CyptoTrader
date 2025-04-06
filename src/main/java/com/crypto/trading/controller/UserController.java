@@ -1,16 +1,18 @@
 package com.crypto.trading.controller;
 
+import com.crypto.trading.entity.TradeHistory;
 import com.crypto.trading.entity.User;
+import com.crypto.trading.entity.Wallet;
+import com.crypto.trading.repository.TradeHistoryRespository;
 import com.crypto.trading.service.UserService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/v1/api/users")
@@ -18,7 +20,7 @@ public class UserController {
 
     private final UserService userService;
 
-    public UserController(UserService userService) {
+    public UserController(UserService userService, TradeHistoryRespository tradeHistoryRespository) {
         this.userService = userService;
     }
 
@@ -36,6 +38,31 @@ public class UserController {
             return ResponseEntity.noContent().build(); // or return 200 with empty list
         }
         return ResponseEntity.ok(users);
+    }
+
+    @GetMapping("/wallets")
+    public ResponseEntity<?> createUserWallet(@RequestHeader("X-USER-ID") long userId) {
+        Optional<User> userOptional = userService.getUserById(userId);
+        List<Wallet> wallets = null;
+        if(userOptional.isPresent()) {
+            wallets = userOptional.get().getWallets();
+            return ResponseEntity.ok(wallets);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @GetMapping("/tradehistory")
+    public ResponseEntity<?> getUserTradeHistory(@RequestHeader("X-USER-ID") long userId) {
+        List<TradeHistory> userTradingHistory = userService.getUserTradingHistory(userId);
+
+        if(userTradingHistory == null ) {
+
+        } else {
+
+        }
+
+        return ResponseEntity.ok(userTradingHistory);
     }
 
 }

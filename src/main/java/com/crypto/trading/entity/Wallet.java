@@ -1,34 +1,24 @@
 package com.crypto.trading.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 
 import java.util.Objects;
 
 @Entity
+@Table(name = "wallet")
 public class Wallet {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long ID;
 
-    private String currency;
+    private String symbol;
 
     private double balance;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
-
-    // Constructors, Getters, Setters
-    public Wallet(String currency, double balance) {
-        this.currency = currency;
-        this.balance = balance;
-    }
 
     public long getID() {
         return ID;
@@ -38,12 +28,12 @@ public class Wallet {
         this.ID = ID;
     }
 
-    public String getCurrency() {
-        return currency;
+    public String getSymbol() {
+        return symbol;
     }
 
-    public void setCurrency(String currency) {
-        this.currency = currency;
+    public void setSymbol(String symbol) {
+        this.symbol = symbol;
     }
 
     public double getBalance() {
@@ -63,19 +53,19 @@ public class Wallet {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Wallet wallet = (Wallet) o;
-        return ID == wallet.ID && Double.compare(balance, wallet.balance) == 0 && Objects.equals(currency, wallet.currency);
+        return ID == wallet.ID && Double.compare(balance, wallet.balance) == 0 && Objects.equals(symbol, wallet.symbol);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(ID, currency, balance);
+        return Objects.hash(ID, symbol, balance);
     }
 
     @Override
     public String toString() {
         return "Wallet{" +
                 "ID=" + ID +
-                ", currency='" + currency + '\'' +
+                ", symbol='" + symbol + '\'' +
                 ", balance=" + balance +
                 '}';
     }

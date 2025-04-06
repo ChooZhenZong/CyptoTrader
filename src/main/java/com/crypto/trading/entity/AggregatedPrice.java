@@ -18,8 +18,8 @@ public class AggregatedPrice {
 
     private String exchange;
     private String tickerSymbol;
-    private BigDecimal bidPrice;
-    private BigDecimal askPrice;
+    private double bidPrice;
+    private double askPrice;
     private Instant timeStamp;
 
     public Long getId() {
@@ -46,19 +46,19 @@ public class AggregatedPrice {
         this.tickerSymbol = tickerSymbol;
     }
 
-    public BigDecimal getBidPrice() {
+    public double getBidPrice() {
         return bidPrice;
     }
 
-    public void setBidPrice(BigDecimal bidPrice) {
+    public void setBidPrice(double bidPrice) {
         this.bidPrice = bidPrice;
     }
 
-    public BigDecimal getAskPrice() {
+    public double getAskPrice() {
         return askPrice;
     }
 
-    public void setAskPrice(BigDecimal askPrice) {
+    public void setAskPrice(double askPrice) {
         this.askPrice = askPrice;
     }
 
