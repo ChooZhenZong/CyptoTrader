@@ -6,6 +6,8 @@ will be able to be boot up by  running the class "TradingApplication" through an
 mvn spring-boot:run through the CMD
 
 
-I personally feel this is not my best job and I could done alot more, but due to time constraint and being on call in my day job, I am unable to do so,
-the team if reviewing the code can most probably spot plenty of incomplete code, design issues and functionality issues
+I personally feel this is not my best job and I could done alot more one factor is that I lack knowledge about crypto trading, and another is that due to time constraint due to my dayjob and being on call support.
+The team if reviewing the code can most probably spot plenty of incomplete code, design issues and functionality issues
 and lack of unit tests
+
+Attached is the collection for simple testing.
